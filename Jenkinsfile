@@ -35,28 +35,6 @@ pipeline {
                 sh "mvn test"
             }
         }
-
-        stage ('build and push the image') {
-            step {
-                script {
-                    def IMAGE_TAG = "build-${env.BUILD_NUMBER}"
-                    env.IMAGE_TAG = IMAGE_TAG
-                    
-                    withCredentials([usernamePassword(
-                        credentialsId: 'docker-creds',
-                        usernameVariable: 'DOCKER_USER',
-                        passwordVariable: 'DOCKER_PASS'
-                    )]) {
-
-                        sh """
-                            docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                            echo "\$DOCKER_PASS" | docker login -u "\$DOCKER_USER" --password-stdin
-                            docker push ${IMAGE_NAME}:${IMAGE_TAG}
-                        """
-                    }
-                }
-            }
-        }
     }
 
 }
