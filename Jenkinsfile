@@ -37,7 +37,7 @@ pipeline {
         }
 
         stage ('build and push the image') {
-            step {
+            steps {
                 script {
                     def IMAGE_TAG = "build-${env.BUILD_NUMBER}"
                     env.IMAGE_TAG = IMAGE_TAG
