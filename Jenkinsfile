@@ -70,5 +70,7 @@ image \
 ${IMAGE_NAME}:${IMAGE_TAG}
 '''
     }
+        }
 
+}
 }
